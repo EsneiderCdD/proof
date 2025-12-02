@@ -1,4 +1,4 @@
-# mi_proyecto — Knowledge Collector (ETL / Audio Processing Pipeline)
+# Knowledge Collector (ETL / Audio Processing Pipeline)
 
 Proyecto ETL sencillo para extraer audio de YouTube, transcribirlo y generar metadatos categorizados.
 Usa `yt-dlp` y `ffmpeg` para la extracción, `whisper` para transcripción y Gemini (`google-genai`) para clasificación.
