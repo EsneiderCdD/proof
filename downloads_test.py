@@ -10,18 +10,18 @@ OUTPUT_DIR = "downloads"
 
 # 3. Configuración de yt-dlp
 ydl_opts = {
-    "format": "bestaudio/best",                # mejor calidad de audio posible
+    "format": "bestaudio/best",                # extraer mejor audio disponible
     "outtmpl": f"{OUTPUT_DIR}/%(title)s.%(ext)s",   # cómo se guardará el archivo
     "postprocessors": [
         {
             "key": "FFmpegExtractAudio",       # usa ffmpeg
-            "preferredcodec": "mp3",           # queremos mp3
+            "preferredcodec": "mp3",           # convertir a mp3
             "preferredquality": "192",         # calidad estándar
         }
     ],
 }
 
-# 4. Pedimos al usuario un link
+# 4. Pedir URL de YouTube (input)
 url = input("Pega aquí el link de YouTube: ")
 
 # 5. Ejecutamos la descarga

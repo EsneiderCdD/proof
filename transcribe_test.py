@@ -5,7 +5,7 @@ import whisper
 AUDIO_DIR = "downloads"
 
 # 2. Cargar el modelo de Whisper
-#    "base" es rápido y suficientemente bueno para pruebas.
+# Modelo 'base': rápido y adecuado para pruebas
 model = whisper.load_model("base")
 
 # 3. Mostrar archivos disponibles
