@@ -3,9 +3,6 @@ import json
 from dotenv import load_dotenv
 from google import genai
 
-# =============================
-# 1. Leer API KEY
-# =============================
 load_dotenv()
 
 api_key = os.getenv("GEMINI_API_KEY")
@@ -14,21 +11,13 @@ if not api_key:
 
 client = genai.Client(api_key=api_key)
 
-# =============================
-# 2. Configuración
-# =============================
 TRANSCRIPTS_DIR = "downloads"
 MODEL_NAME = "gemini-2.0-flash"
 
-
-# =============================
-# 3. Prompt limpio y profesional
-# =============================
 def build_prompt(transcript_text: str):
     return f"""
 Analiza la siguiente transcripción corta de un reel/short.
 
-### INSTRUCCIONES IMPORTANTES:
 - Responde SOLO con un JSON puro.
 - NO coloques nada fuera del JSON (ni ```json, ni explicación).
 - No inventes datos.
@@ -37,7 +26,6 @@ Analiza la siguiente transcripción corta de un reel/short.
 - La descripción larga puede tener más detalle pero sin adornos.
 - Si hay website real mencionado, inclúyelo; si no, "".
 
-### FORMATO EXACTO:
 {{
   "titulo": "",
   "descripcion_corta": "",
@@ -45,14 +33,9 @@ Analiza la siguiente transcripción corta de un reel/short.
   "website": ""
 }}
 
-### TEXTO A PROCESAR:
 {transcript_text}
 """
 
-
-# =============================
-# 4. Limpiar respuesta del modelo
-# =============================
 def extract_json(text: str):
     """
     Elimina bloques ```json, ``` y cualquier texto basura
@@ -61,11 +44,9 @@ def extract_json(text: str):
 
     text = text.strip()
 
-    # eliminar ```json ... ``` si aparece
     if "```" in text:
         text = text.replace("```json", "").replace("```", "").strip()
 
-    # recortar desde primer { hasta último }
     if "{" in text and "}" in text:
         start = text.find("{")
         end = text.rfind("}") + 1
@@ -73,17 +54,9 @@ def extract_json(text: str):
 
     return text
 
-
-# =============================
-# 5. Listar archivos .txt
-# =============================
 def list_text_files():
     return [f for f in os.listdir(TRANSCRIPTS_DIR) if f.endswith(".txt")]
 
-
-# =============================
-# 6. Programa principal
-# =============================
 def main():
 
     print("\n=== Archivos disponibles en downloads/ ===")
@@ -107,16 +80,11 @@ def main():
 
     print(f"\nProcesando → {selected_file}\n")
 
-    # Leer transcripción
     with open(file_path, "r", encoding="utf-8") as f:
         transcript = f.read()
 
-    # Crear prompt
     prompt = build_prompt(transcript)
 
-    # =============================
-    # Llamada a Gemini
-    # =============================
     response = client.models.generate_content(
         model=MODEL_NAME,
         contents=prompt
@@ -126,10 +94,8 @@ def main():
     print("\n=== Respuesta del modelo (cruda) ===\n")
     print(raw_output)
 
-    # Limpiar y extraer JSON
     cleaned_json = extract_json(raw_output)
 
-    # Guardar JSON
     output_file = selected_file.replace(".txt", "_categorized.json")
     output_path = os.path.join(TRANSCRIPTS_DIR, output_file)
 
@@ -145,9 +111,5 @@ def main():
         print("\n⚠️ ERROR: Gemini no devolvió JSON válido incluso después de limpiar.")
         print("   Puedes editar a mano o reenviar la transcripción.")
 
-
-# =============================
-# 7. Ejecutar
-# =============================
 if __name__ == "__main__":
     main()

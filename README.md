@@ -25,6 +25,5 @@ Usa `yt-dlp` y `ffmpeg` para la extracción, `whisper` para transcripción y Gem
 - El script tiene la creación de carpeta `downloads/` comentada — asegúrate de tener la carpeta si la usas desde cero.
 - No se han hecho cambios en archivos fuera de este README; el resto del proyecto se mantiene tal como está.
 
----
-Pequeño y directo: documentación mínima del estado actual del proyecto.
+
 

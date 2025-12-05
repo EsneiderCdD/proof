@@ -1,30 +1,22 @@
 import os
 from yt_dlp import YoutubeDL
 
-# 1. Ruta donde guardaremos los audios
 OUTPUT_DIR = "downloads"
 
-# 2. Si la carpeta no existe, la creamos
-# if not os.path.exists(OUTPUT_DIR):
-#     os.makedirs(OUTPUT_DIR)
-
-# 3. Configuración de yt-dlp
 ydl_opts = {
-    "format": "bestaudio/best",                # extraer mejor audio disponible
-    "outtmpl": f"{OUTPUT_DIR}/%(title)s.%(ext)s",   # cómo se guardará el archivo
+    "format": "bestaudio/best",              
+    "outtmpl": f"{OUTPUT_DIR}/%(title)s.%(ext)s",  
     "postprocessors": [
         {
-            "key": "FFmpegExtractAudio",       # usa ffmpeg
-            "preferredcodec": "mp3",           # convertir a mp3
-            "preferredquality": "192",         # calidad estándar
+            "key": "FFmpegExtractAudio",      
+            "preferredcodec": "mp3",         
+            "preferredquality": "192",       
         }
     ],
 }
 
-# 4. Pedir URL de YouTube (input)
-url = input("Pega aquí el link de YouTube: ")
+url = input("Pega aquí el link: ")
 
-# 5. Ejecutamos la descarga
 with YoutubeDL(ydl_opts) as ydl:
     ydl.download([url])
 
