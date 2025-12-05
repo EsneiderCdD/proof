@@ -1,0 +1,6 @@
+{
+    "titulo": "UV: El verdugo de Pip",
+    "descripcion_corta": "Descubre UV, una herramienta que promete reemplazar a Pip para la gestión de paquetes y entornos en Python.",
+    "descripcion_larga": "El video presenta UV como una alternativa a Pip para la gestión de paquetes y entornos virtuales en Python. Muestra cómo UV simplifica la creación de entornos, la gestión de dependencias y la instalación de paquetes, incluyendo la posibilidad de correr diferentes versiones de Python. Demuestra los comandos básicos como `uv init`, `uv add` y `uv python install` para ilustrar su funcionamiento y velocidad.",
+    "website": ""
+}
