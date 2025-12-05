@@ -21,9 +21,3 @@ Usa `yt-dlp` y `ffmpeg` para la extracción, `whisper` para transcripción y Gem
  - El script `transcribe_test.py` muestra los MP3 en `downloads/`, pide seleccionar uno y guarda la transcripción como un archivo .txt junto al MP3.
  - El script `categorize_test.py` lee transcripciones .txt desde `downloads/`, construye un prompt y llama a Gemini para generar un JSON con título/descripcion/website; se requiere la variable `GEMINI_API_KEY` en un archivo `.env`.
 
-## Notas rápidas
-- El script tiene la creación de carpeta `downloads/` comentada — asegúrate de tener la carpeta si la usas desde cero.
-- No se han hecho cambios en archivos fuera de este README; el resto del proyecto se mantiene tal como está.
-
-
-
